@@ -1,0 +1,57 @@
+# Core foundational packages
+numpy==1.26.4
+six==1.17.0
+packaging==25.0
+typing-extensions>=4.0.0
+
+# Basic utilities and parsing
+pyparsing==3.2.5
+python-dateutil==2.9.0.post0
+pytz==2025.2
+tzdata==2025.2
+zipp==3.23.0
+importlib_resources==6.5.2
+
+# Scientific computing foundation
+scipy
+
+# Data manipulation and analysis
+pandas==2.3.3
+polars==0.20.18
+polars-runtime-32==1.35.2
+h5py
+
+# Machine learning utilities
+joblib==1.5.2
+threadpoolctl==3.6.0
+
+# Compiled/optimized computing
+numba
+
+# Machine learning frameworks
+scikit-learn==1.6.1
+
+# Plotting and visualization dependencies
+cycler==0.12.1
+kiwisolver==1.4.7
+fonttools==4.60.1
+pillow==11.3.0
+contourpy==1.3.0
+
+# Plotting libraries
+matplotlib==3.9.4
+seaborn>=0.12.0
+
+# # Deep learning frameworks
+tensorflow
+torch>=1.9.0
+torchvision>=0.10.0
+
+# # Graph neural networks (use latest available version)
+dgl
+
+# # Jupyter/notebook support
+ipykernel>=6.0.0
+
+# Recommendation system library
+cornac
