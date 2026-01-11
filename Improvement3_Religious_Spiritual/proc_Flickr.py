@@ -183,8 +183,7 @@ if __name__ == "__main__":
         y = y[:,pop_ranking_ix]
         location = location[pop_ranking_ix,:]
 
-        # Add this to keep only 25% of users:
-        N_subset = int(1 * y.shape[0])  # 25% of users
+        N_subset = int(1 * y.shape[0])  
         y = y[:N_subset, :]
 	
         # NEW: Update rank mappings after filtering
@@ -213,7 +212,7 @@ if __name__ == "__main__":
                 "location": location,
                 "capacity": np.array([1]*J, dtype="i8"),
                 "time_required": np.array([1]*J, dtype="i8"),
-                "religious_sites": religious_sites,  # NEW
+                "religious_sites": religious_sites, 
             },
         )
         print(f"Done! city={city} N={N} J={J} Religious sites={len(religious_sites)}")

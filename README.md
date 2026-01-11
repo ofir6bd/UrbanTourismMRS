@@ -43,7 +43,10 @@ Improvement 4
 1) Copy from "Improvement4_Reduced_Walking" and paste into "\src\exp"  
 2) Run simulation steps 5-10  
 3) Copy 2 files "runx_Rome_ease_vae.pk" and "runx_Rome_ease_wmf.pk" from "out/experiments" to "All_pk_comparison" and add suffix "_4_reduce_walking_with_routing" 
-3) Plot - Manually run Python file "\src\exp\Analysis_comp_impro4_reduce_walking_smart_walking.py"
+4) Copy from "Improvement4_Reduced_Walking_base" and paste into "\src\exp"  
+5) Run simulation steps 5-10  
+6) Copy 2 files "runx_Rome_ease_vae.pk" and "runx_Rome_ease_wmf.pk" from "out/experiments" to "All_pk_comparison" and add suffix "_4_reduce_walking_base" 
+7) Plot - Manually run Python file "\src\exp\Analysis_comp_impro4_reduce_walking_smart_walking.py"
 
 
 ############ To return to the original code ############

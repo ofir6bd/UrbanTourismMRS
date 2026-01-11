@@ -15,13 +15,11 @@ def load_and_compare_rome_walking_results():
     file_pairs = {
         'EASE_WMF': {
             'base': f"All_pk_conparison/runx_{city}_ease_wmf_4_reduce_walking_base.pk",
-            # 'reduce_walking': f"All_pk_conparison/runx_{city}_ease_wmf_4_reduce_walking.pk"
             'reduce_walking': f"All_pk_conparison/runx_{city}_ease_wmf_4_reduce_walking_with_routing.pk"
             
         },
         'EASE_VAE': {
             'base': f"All_pk_conparison/runx_{city}_ease_vae_4_reduce_walking_base.pk", 
-            # 'reduce_walking': f"All_pk_conparison/runx_{city}_ease_vae_4_reduce_walking.pk"
             'reduce_walking': f"All_pk_conparison/runx_{city}_ease_vae_4_reduce_walking_with_routing.pk"
         }
     }

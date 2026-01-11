@@ -211,12 +211,6 @@ def load_and_plot_rome_results():
     quad_offset_x = (x_max - 0) * 0.15
     quad_offset_y = (y_max - 0) * 0.15
     
-    # Win-Win quadrant label - moved more to the right to avoid overlap
-    # ax.text(0 + quad_offset_x * 1.8, 0 + quad_offset_y, 
-    #         'WIN-WIN\n(Positive Sum)', 
-    #         fontsize=12, color='darkgreen', alpha=0.8, fontweight='bold',
-    #         horizontalalignment='center', verticalalignment='center')
-    
     # Other quadrants - positioned to avoid left side
     ax.text(0 + quad_offset_x * 1.8, 0 - quad_offset_y, 
             'User Win\nDest Loss', 
@@ -238,109 +232,6 @@ def load_and_plot_rome_results():
     
     plt.tight_layout()
     plt.show()
-    
-    # Print detailed statistics
-    print(f"\n{'='*70}")
-    print(f"DETAILED POSITIVE QUADRANT ANALYSIS - EASE MODELS vs KNN BASELINE")
-    print(f"{'='*70}")
-    
-    # Separate EASE models from baseline for clearer reporting
-    ease_models = {k: v for k, v in model_stats.items() if 'baseline' not in k.lower()}
-    baseline_models = {k: v for k, v in model_stats.items() if 'baseline' in k.lower()}
-    
-    print(f"\nEASE VARIANT MODELS:")
-    print(f"-" * 40)
-    for model_name, stats in ease_models.items():
-        print(f"\n{model_name}:")
-        print(f"  Total points: {stats['total_count']}")
-        print(f"  Win-Win points: {stats['positive_count']}")
-        print(f"  Success rate: {stats['percentage']:.2f}%")
-        print(f"  Sum of User uplift (Win-Win): {stats['tau_aggregate']:.6f}")
-        print(f"  Sum of Dest uplift (Win-Win): {stats['eta_aggregate']:.6f}")
-        print(f"  Total aggregate value: {stats['total_aggregate']:.6f}")
-        
-        if stats['positive_count'] > 0:
-            print(f"  Avg user uplift (Win-Win): {stats['tau_avg']:.4f}")
-            print(f"  Avg dest uplift (Win-Win): {stats['eta_avg']:.4f}")
-    
-    if baseline_models:
-        print(f"\nBASELINE MODEL:")
-        print(f"-" * 40)
-        for model_name, stats in baseline_models.items():
-            print(f"\n{model_name}:")
-            print(f"  Total points: {stats['total_count']}")
-            print(f"  Win-Win points: {stats['positive_count']}")
-            print(f"  Success rate: {stats['percentage']:.2f}%")
-            print(f"  Sum of User uplift (Win-Win): {stats['tau_aggregate']:.6f}")
-            print(f"  Sum of Dest uplift (Win-Win): {stats['eta_aggregate']:.6f}")
-            print(f"  Total aggregate value: {stats['total_aggregate']:.6f}")
-            
-            if stats['positive_count'] > 0:
-                print(f"  Avg user uplift (Win-Win): {stats['tau_avg']:.4f}")
-                print(f"  Avg dest uplift (Win-Win): {stats['eta_avg']:.4f}")
-    
-    if model_stats:
-        total_positive = sum(stats['positive_count'] for stats in model_stats.values())
-        total_points = sum(stats['total_count'] for stats in model_stats.values())
-        overall_percentage = total_positive/total_points*100 if total_points > 0 else 0
-        total_tau_aggregate = sum(stats['tau_aggregate'] for stats in model_stats.values())
-        total_eta_aggregate = sum(stats['eta_aggregate'] for stats in model_stats.values())
-        combined_total_aggregate = total_tau_aggregate + total_eta_aggregate
-        
-        print(f"\n{'='*70}")
-        print(f"COMBINED RESULTS (ALL MODELS):")
-        print(f"Total Win-Win points: {total_positive}/{total_points}")
-        print(f"Overall success rate: {overall_percentage:.2f}%")
-        print(f"Combined User aggregate: {total_tau_aggregate:.6f}")
-        print(f"Combined Dest aggregate: {total_eta_aggregate:.6f}")
-        print(f"Total combined aggregate: {combined_total_aggregate:.6f}")
-        
-        # Performance ranking
-        print(f"\nPERFORMANCE RANKING (by Win-Win success rate):")
-        print(f"-" * 50)
-        sorted_models = sorted(model_stats.items(), key=lambda x: x[1]['percentage'], reverse=True)
-        for rank, (model_name, stats) in enumerate(sorted_models, 1):
-            print(f"{rank}. {model_name}: {stats['percentage']:.2f}% "
-                  f"({stats['positive_count']}/{stats['total_count']} points)")
-        
-        # Compare EASE variants vs baseline
-        if ease_models and baseline_models:
-            ease_positive = sum(stats['positive_count'] for stats in ease_models.values())
-            ease_total = sum(stats['total_count'] for stats in ease_models.values())
-            ease_percentage = ease_positive/ease_total*100 if ease_total > 0 else 0
-            
-            baseline_stats = list(baseline_models.values())[0]  # Only one baseline
-            baseline_percentage = baseline_stats['percentage']
-            
-            print(f"\nEASE VARIANTS vs KNN BASELINE COMPARISON:")
-            print(f"EASE Variants Average Win-Win Rate: {ease_percentage:.2f}% ({ease_positive}/{ease_total})")
-            print(f"KNN Baseline Win-Win Rate: {baseline_percentage:.2f}% "
-                  f"({baseline_stats['positive_count']}/{baseline_stats['total_count']})")
-            print(f"Improvement over baseline: {ease_percentage - baseline_percentage:.2f} percentage points")
-            
-            # Individual comparisons
-            print(f"\nINDIVIDUAL vs BASELINE COMPARISONS:")
-            for model_name, stats in ease_models.items():
-                improvement = stats['percentage'] - baseline_percentage
-                multiplier = stats['percentage'] / baseline_percentage if baseline_percentage > 0 else float('inf')
-                print(f"• {model_name}: {improvement:+.2f} pp improvement ({multiplier:.1f}x better)")
-        
-        # Key insights
-        print(f"\nKEY INSIGHTS:")
-        print(f"-" * 20)
-        best_model = sorted_models[0]
-        worst_model = sorted_models[-1]
-        print(f"• Best performer: {best_model[0]} with {best_model[1]['percentage']:.1f}% Win-Win rate")
-        print(f"• Worst performer: {worst_model[0]} with {worst_model[1]['percentage']:.1f}% Win-Win rate")
-        print(f"• Performance gap: {best_model[1]['percentage'] - worst_model[1]['percentage']:.1f} percentage points")
-        
-        if baseline_models:
-            baseline_name = list(baseline_models.keys())[0]
-            baseline_perf = baseline_models[baseline_name]['percentage']
-            best_ease = max(ease_models.items(), key=lambda x: x[1]['percentage'])
-            print(f"• Best EASE variant ({best_ease[0]}) is {best_ease[1]['percentage']/baseline_perf:.1f}x better than {baseline_name}")
-        
-        print(f"{'='*70}")
     
     return model_stats
 
