@@ -48,6 +48,13 @@ Improvement 4
 6) Copy 2 files "runx_Rome_ease_vae.pk" and "runx_Rome_ease_wmf.pk" from "out/experiments" to "All_pk_comparison" and add suffix "_4_reduce_walking_base" 
 7) Plot - Manually run Python file "\src\exp\Analysis_comp_impro4_reduce_walking_smart_walking.py"
 
+Improvement 5
+1) Copy 1 file "runx_Rome_ease_wmf.pk" from "out/experiments" to "All_pk_comparison" and add suffix "_5_with_random_init" 
+2) Copy from "Improvement5_WMF_LLM_Init" and paste into "\src\exp" 
+3) Move file "run1_R.sh" from the "\src\exp"  to the main directory (replace the original file)
+4) Run simulation steps 5-10 
+5) Copy 1 file "runx_Rome_ease_wmf.pk" from "out/experiments" to "All_pk_comparison" and add suffix "_5_with_llm_init" 
+6) Plot - Manually run Python file "\src\exp\Analysis_compare_llm_init.py" this will present the differences between the original EASE_WMF and with the LLM init 
 
 ############ To return to the original code ############
 1) Copy from "Original_Code" and paste into "\src\exp"  
